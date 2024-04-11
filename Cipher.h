@@ -21,7 +21,7 @@ virtual bool encode(string decodedMsg) = 0;
    * @return true if decode was successful
    */
   /*TODO: write your code*/
-virtual bool docode(string encodedMsg) = 0;
+virtual bool decode(string encodedMsg) = 0;
   /*
    * isValidCharacter(): abstract helper function (pure virtual) to check if a character is valid for a cipher
    * @param c - character to check

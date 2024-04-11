@@ -6,9 +6,9 @@ AutokeyCipher::AutokeyCipher(string primer) : Cipher(CIPHER_NAME), primer(primer
 
 bool AutokeyCipher::encode(string decodedMsg) {
 
-string key = primer + message;
-for(i = 0; i < decodedMsg.length(); i++){
-  if(isValidCharacter(decodedMsg[i] && decodedMsg != ' ')){
+string key = primer + decodedMsg;
+for(int i = 0; i < decodedMsg.length(); i++){
+  if(isValidCharacter(decodedMsg[i]) && (decodedMsg[i] != ' ')){
     encoded[i] = (key[i] + decodedMsg[i]) % 26;
     encoded[i] = encoded[i] + 65;
   }
@@ -17,30 +17,31 @@ for(i = 0; i < decodedMsg.length(); i++){
   }
 
 }
-
+    this-> encoded = decodedMsg;
 return true;
 }
 
 bool AutokeyCipher::decode(string encodedMsg) {
   /*TODO: write your code*/
   string key = primer;
-for(i = 0; i < decodedMsg.length(); i++){
-  if(isValidCharacter(decodedMsg[i] && decodedMsg != ' ')){
-    encoded[i] = (decodedMsg[i] - key[i]) % 26;
+for( int i = 0; i < encodedMsg.length(); i++){
+  if(isValidCharacter(encodedMsg[i]) && (encodedMsg[i] != ' ')){
+    encoded[i] = (encodedMsg[i] - key[i]) % 26;
     encoded[i] = encoded[i] + 65;
-    if(encodedMsg < 65){
+    if(encodedMsg[i] < 65){
       encodedMsg[i] = encodedMsg[i] + 26;
 
     }
-
-  }
-  decoded = decoded + encodedMsg[i];
-  key = key + encodedMsg[i];
   }
   else{
     return false;
   }
-
+  
+  decoded = decoded + encodedMsg[i];
+  key = key + encodedMsg[i];
+}
+  
+    this-> decoded = encodedMsg;
 return true;
 }
 
